@@ -1,0 +1,31 @@
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"     # Acceso HTTP desde fuera
+      - "110:110"     # Puerto para conexión TCP directa desde host
+      - "31227:31227"     
+      - "25:25"     
+    volumes:
+      - sql_data:/shared
+    depends_on:
+      - db
+    networks:
+      - reon-network
+
+  db:
+    image: mariadb:latest
+    volumes:
+      - sql_data:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - reon-network
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+
+volumes:
+  sql_data:
+
+networks:
+  reon-network:
