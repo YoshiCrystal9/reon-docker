@@ -86,8 +86,8 @@ RUN echo '#!/bin/sh\n'\
 'npm start' > /var/www/web/app/pokemon-battle/start-pokemon.sh && chmod +x /var/www/web/app/pokemon-battle/start-pokemon.sh
 
 # Crear una sola entrada de cron con ambas tareas
-RUN echo '* * * * * /var/www/web/app/pokemon-exchange/start-pokemon.sh >> /var/log/cron.log 2&>1\n'\
-'* * * * * /var/www/web/app/pokemon-battle/start-pokemon.sh >> /var/log/cron.log 2&>1' \
+RUN echo '* * * * * /var/www/web/app/pokemon-exchange/start-pokemon.sh\n'\
+'* * * * * /var/www/web/app/pokemon-battle/start-pokemon.sh' \
 > /etc/cron.d/pokemon-cron
 
 # Permisos y activar cron
